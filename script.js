@@ -198,11 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
      9. HERO VIDEO AUTOPLAY & AUTOMATIC AUDIO TRIGGER
      =================================================== */
   const heroVideo = document.getElementById('hero-video');
-  const volumeToggle = document.getElementById('hero-volume-toggle');
-  const volumeIconMute = document.getElementById('volume-icon-mute');
-  const volumeIconUp = document.getElementById('volume-icon-up');
-  const audioWave = document.getElementById('audio-wave');
-  const volumeText = volumeToggle ? volumeToggle.querySelector('.volume-text') : null;
   
   if (heroVideo) {
     const playPromise = heroVideo.play();
@@ -224,29 +219,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let userWantsSound = false;
+  let volumeFadeInterval = null;
 
-  const updateVolumeUI = (isMuted) => {
-    if (!volumeIconMute || !volumeIconUp || !volumeText) return;
-    if (isMuted) {
-      volumeIconMute.classList.remove('hidden');
-      volumeIconUp.classList.add('hidden');
-      volumeText.textContent = 'Unmute';
-      if (audioWave) audioWave.classList.remove('playing');
-    } else {
-      volumeIconMute.classList.add('hidden');
-      volumeIconUp.classList.remove('hidden');
-      volumeText.textContent = 'Mute';
-      if (audioWave) audioWave.classList.add('playing');
+  const fadeVideoVolume = (targetVolume, duration = 800) => {
+    if (!heroVideo) return;
+    
+    if (targetVolume > 0 && heroVideo.muted) {
+      heroVideo.muted = false;
     }
+
+    clearInterval(volumeFadeInterval);
+    
+    const startVolume = heroVideo.volume;
+    const difference = targetVolume - startVolume;
+    const stepTime = 30; // 30ms step updates
+    const steps = duration / stepTime;
+    const stepAmount = difference / steps;
+    
+    let currentStep = 0;
+    
+    volumeFadeInterval = setInterval(() => {
+      currentStep++;
+      let nextVolume = startVolume + (stepAmount * currentStep);
+      
+      // Clamp values
+      if (nextVolume < 0) nextVolume = 0;
+      if (nextVolume > 1) nextVolume = 1;
+      
+      heroVideo.volume = nextVolume;
+      
+      if (currentStep >= steps) {
+        clearInterval(volumeFadeInterval);
+        heroVideo.volume = targetVolume;
+        if (targetVolume === 0) {
+          heroVideo.muted = true;
+        }
+      }
+    }, stepTime);
   };
 
-  // Auto-Unmute voice on first page interaction
+  // Auto-Unmute voice smoothly on first page interaction
   const autoUnmuteOnInteraction = () => {
-    if (heroVideo && heroVideo.muted) {
-      heroVideo.muted = false;
+    if (heroVideo) {
+      heroVideo.volume = 0;
       userWantsSound = true;
-      updateVolumeUI(false);
-      console.log("Voice unmuted automatically on user interaction.");
+      fadeVideoVolume(1, 1000); // Smooth fade to 100% volume over 1s
+      console.log("Voice unmuted and fading in automatically.");
     }
     // Clean up all document listener handles
     document.removeEventListener('click', autoUnmuteOnInteraction);
@@ -261,45 +279,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('touchstart', autoUnmuteOnInteraction);
   }, 1000);
 
-  // Manual volume click controls
-  if (volumeToggle && heroVideo && volumeIconMute && volumeIconUp && volumeText) {
-    volumeToggle.addEventListener('click', (e) => {
-      e.stopPropagation(); // Avoid triggering autoUnmuteOnInteraction double-events
-      
-      // Clean up the automatic triggers
-      document.removeEventListener('click', autoUnmuteOnInteraction);
-      document.removeEventListener('scroll', autoUnmuteOnInteraction);
-      document.removeEventListener('touchstart', autoUnmuteOnInteraction);
-
-      if (heroVideo.muted) {
-        heroVideo.muted = false;
-        userWantsSound = true;
-        updateVolumeUI(false);
-      } else {
-        heroVideo.muted = true;
-        userWantsSound = false;
-        updateVolumeUI(true);
-      }
-    });
-  }
-
-  // Auto-mute audio when scrolling out of hero, auto-unmute when scrolling back up
+  // Auto-mute audio smoothly when scrolling out of hero, auto-unmute smoothly when scrolling back up
   const handleScrollAudioMute = () => {
     if (!heroVideo) return;
     const scrollThreshold = window.innerHeight * 0.6; // 60% of screen height
     
     if (window.scrollY > scrollThreshold) {
-      if (!heroVideo.muted) {
-        heroVideo.muted = true;
-        updateVolumeUI(true);
-        console.log("Audio auto-muted on scroll down.");
+      if (!heroVideo.muted && heroVideo.volume > 0) {
+        fadeVideoVolume(0, 800); // Fade out to silent over 800ms
+        console.log("Audio fading out on scroll down.");
       }
     } else {
-      // If we scroll back to the hero section, and the user originally wanted sound on
-      if (userWantsSound && heroVideo.muted) {
-        heroVideo.muted = false;
-        updateVolumeUI(false);
-        console.log("Audio auto-restored on scroll up.");
+      if (userWantsSound && (heroVideo.muted || heroVideo.volume < 1)) {
+        fadeVideoVolume(1, 800); // Fade in to full volume over 800ms
+        console.log("Audio fading in on scroll up.");
       }
     }
   };
@@ -783,18 +776,9 @@ document.addEventListener('DOMContentLoaded', () => {
       aiPanel.setAttribute('aria-hidden', 'false');
       document.body.classList.add('no-scroll');
       
-      // Stop general background video voice if AI starts talking to avoid overlap
-      if (heroVideo && !heroVideo.muted) {
-        heroVideo.muted = true;
-        const volumeIconMute = document.getElementById('volume-icon-mute');
-        const volumeIconUp = document.getElementById('volume-icon-up');
-        const volumeText = volumeToggle ? volumeToggle.querySelector('.volume-text') : null;
-        if (volumeIconMute && volumeIconUp && volumeText) {
-          volumeIconMute.classList.remove('hidden');
-          volumeIconUp.classList.add('hidden');
-          volumeText.textContent = 'Unmute';
-        }
-        if (audioWave) audioWave.classList.remove('playing');
+      // Stop general background video voice smoothly if AI starts talking to avoid overlap
+      if (heroVideo && !heroVideo.muted && heroVideo.volume > 0) {
+        fadeVideoVolume(0, 300); // Quick fade out over 300ms
       }
       
       setTimeout(() => {
@@ -810,6 +794,12 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.remove('no-scroll');
       window.speechSynthesis.cancel();
       if (recognition && isListening) recognition.stop();
+      
+      // Fade back in if still inside the Hero viewport range
+      const scrollThreshold = window.innerHeight * 0.6;
+      if (window.scrollY <= scrollThreshold && heroVideo && userWantsSound) {
+        fadeVideoVolume(1, 600); // Smooth fade in over 600ms
+      }
     }
   };
 
