@@ -223,18 +223,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  let userWantsSound = false;
+
+  const updateVolumeUI = (isMuted) => {
+    if (!volumeIconMute || !volumeIconUp || !volumeText) return;
+    if (isMuted) {
+      volumeIconMute.classList.remove('hidden');
+      volumeIconUp.classList.add('hidden');
+      volumeText.textContent = 'Unmute';
+      if (audioWave) audioWave.classList.remove('playing');
+    } else {
+      volumeIconMute.classList.add('hidden');
+      volumeIconUp.classList.remove('hidden');
+      volumeText.textContent = 'Mute';
+      if (audioWave) audioWave.classList.add('playing');
+    }
+  };
+
   // Auto-Unmute voice on first page interaction
   const autoUnmuteOnInteraction = () => {
     if (heroVideo && heroVideo.muted) {
       heroVideo.muted = false;
-      if (volumeIconMute && volumeIconUp && volumeText) {
-        volumeIconMute.classList.add('hidden');
-        volumeIconUp.classList.remove('hidden');
-        volumeText.textContent = 'Mute';
-      }
-      if (audioWave) {
-        audioWave.classList.add('playing');
-      }
+      userWantsSound = true;
+      updateVolumeUI(false);
       console.log("Voice unmuted automatically on user interaction.");
     }
     // Clean up all document listener handles
@@ -243,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.removeEventListener('touchstart', autoUnmuteOnInteraction);
   };
 
-  // Wait 1.5s after page loads before listening to click/scroll triggers to prevent sudden audio shock
+  // Wait 1.0s after page loads before listening to click/scroll triggers to prevent sudden audio shock
   setTimeout(() => {
     document.addEventListener('click', autoUnmuteOnInteraction);
     document.addEventListener('scroll', autoUnmuteOnInteraction);
@@ -262,19 +273,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (heroVideo.muted) {
         heroVideo.muted = false;
-        volumeIconMute.classList.add('hidden');
-        volumeIconUp.classList.remove('hidden');
-        volumeText.textContent = 'Mute';
-        if (audioWave) audioWave.classList.add('playing');
+        userWantsSound = true;
+        updateVolumeUI(false);
       } else {
         heroVideo.muted = true;
-        volumeIconMute.classList.remove('hidden');
-        volumeIconUp.classList.add('hidden');
-        volumeText.textContent = 'Unmute';
-        if (audioWave) audioWave.classList.remove('playing');
+        userWantsSound = false;
+        updateVolumeUI(true);
       }
     });
   }
+
+  // Auto-mute audio when scrolling out of hero, auto-unmute when scrolling back up
+  const handleScrollAudioMute = () => {
+    if (!heroVideo) return;
+    const scrollThreshold = window.innerHeight * 0.6; // 60% of screen height
+    
+    if (window.scrollY > scrollThreshold) {
+      if (!heroVideo.muted) {
+        heroVideo.muted = true;
+        updateVolumeUI(true);
+        console.log("Audio auto-muted on scroll down.");
+      }
+    } else {
+      // If we scroll back to the hero section, and the user originally wanted sound on
+      if (userWantsSound && heroVideo.muted) {
+        heroVideo.muted = false;
+        updateVolumeUI(false);
+        console.log("Audio auto-restored on scroll up.");
+      }
+    }
+  };
+
+  window.addEventListener('scroll', handleScrollAudioMute);
 
   /* ===================================================
      10. SCROLL REVEAL & SKILL BARS ACTIVATION
