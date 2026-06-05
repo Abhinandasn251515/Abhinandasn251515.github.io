@@ -917,14 +917,17 @@ document.addEventListener('DOMContentLoaded', () => {
           
           if (dist < connectionDist) {
             const alpha = (1 - (dist / connectionDist)) * 0.12;
+            pCtx.save();
+            pCtx.globalAlpha = alpha;
             pCtx.beginPath();
             pCtx.moveTo(particles[i].x, particles[i].y);
             pCtx.lineTo(particles[j].x, particles[j].y);
             
             const accentCyan = getComputedStyle(document.documentElement).getPropertyValue('--accent-cyan').trim() || '#00f2fe';
-            pCtx.strokeStyle = `${accentCyan}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
+            pCtx.strokeStyle = accentCyan;
             pCtx.lineWidth = 0.8;
             pCtx.stroke();
+            pCtx.restore();
           }
         }
       }
