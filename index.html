@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Abhinandan Ghosh, MCA Student at MSIT & Creative Video Editor. Specialized in programming (Python, Java), DSA, and video production. Good listener and team player.">
+  <meta name="keywords" content="Abhinandan Ghosh, Video Editor, MCA Student, Brainware University, MSIT, Python, Java, Portfolio, Kolkata">
+  <meta name="author" content="Abhinandan Ghosh">
+  <title>Abhinandan Ghosh | MCA Student & Creative Visual Editor</title>
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Futuristic Heading Font: Orbitron | Clean Body Font: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Interactive Top Scroll Progress Indicator Bar -->
+  <div class="scroll-progress-bar" id="scroll-progress"></div>
+
+  <!-- Ambient Moving Background Blobs (Dynamic Visuals) -->
+  <div class="blob-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Interactive Cursor Background Glow (Futuristic Accent) -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- Header / Navigation -->
+  <header class="header" id="header">
+    <div class="header-container container">
+      <a href="#" class="logo" id="nav-logo">
+        <span class="logo-accent">&lt;</span>AG<span class="logo-accent"> /&gt;</span>
+      </a>
+      
+      <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+
+      <nav class="nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#" class="nav-link active" id="link-home">Home</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link" id="link-about">About</a></li>
+          <li class="nav-item"><a href="#education" class="nav-link" id="link-education">Education</a></li>
+          <li class="nav-item"><a href="#services" class="nav-link" id="link-services">Services</a></li>
+          <li class="nav-item"><a href="#projects" class="nav-link" id="link-projects">Projects</a></li>
+          <li class="nav-item"><a href="#skills" class="nav-link" id="link-skills">Skills</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link btn-nav" id="link-contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <!-- Hero Video Background (Occupying full screen but aligned to show avatar on the right) -->
+    <div class="hero-video-container">
+      <video id="hero-video" class="hero-video" autoplay loop muted playsinline preload="auto">
+        <source src="webvideo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-gradient-overlay"></div>
+      
+      <!-- Video Audio Controller with Waveform Indicator -->
+      <button id="hero-volume-toggle" class="hero-volume-btn" aria-label="Unmute hero video">
+        <svg id="volume-icon-mute" class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+          <path d="M9 9v6a3 3 0 0 0 3 3h1.586l4.707 4.707A1 1 0 0 0 20 22V4a1 1 0 0 0-1.707-.707L13.586 8H12a3 3 0 0 0-3 1z"></path>
+        </svg>
+        <svg id="volume-icon-up" class="volume-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <span class="volume-text">Unmute</span>
+        <!-- Wave visualizer inside toggle -->
+        <div class="audio-wave-container" id="audio-wave">
+          <span class="wave-bar bar-1"></span>
+          <span class="wave-bar bar-2"></span>
+          <span class="wave-bar bar-3"></span>
+          <span class="wave-bar bar-4"></span>
+          <span class="wave-bar bar-5"></span>
+        </div>
+      </button>
+    </div>
+    
+    <div class="hero-content container">
+      <div class="hero-text-wrapper">
+        <div class="hero-badge animate-reveal" style="--delay: 0.1s;">
+          <span class="badge-dot"></span>
+          <span class="badge-text">MCA Student &amp; Tech Creator</span>
+        </div>
+        <h1 class="hero-title animate-reveal" style="--delay: 0.3s;">
+          ABHINANDAN<br><span class="gradient-text">GHOSH</span>
+        </h1>
+        <div class="profession-wrapper animate-reveal" style="--delay: 0.5s;">
+          <span class="hero-profession" id="typing-profession">MCA STUDENT</span>
+        </div>
+        <p class="hero-description animate-reveal" style="--delay: 0.7s;">
+          A <strong class="glow-text">GOOD LISTENER</strong> who bridges the gap between technology and creative storytelling. I build responsive systems and edit high-impact media content.
+        </p>
+        <div class="hero-ctas animate-reveal" style="--delay: 0.9s;">
+          <a href="#projects" class="btn btn-primary" id="btn-hero-portfolio">
+            <span>Explore Work</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#contact" class="btn btn-secondary" id="btn-hero-contact">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator animate-bounce">
+      <a href="#about" aria-label="Scroll down to About section">
+        <div class="mouse-icon">
+          <div class="wheel"></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    <!-- About Section -->
+    <section id="about" class="about-section section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">// Biography</span>
+          <h2 class="section-title">ABOUT ME</h2>
+          <div class="section-divider"></div>
+        </div>
+        
+        <div class="about-grid">
+          <div class="about-visual animate-on-scroll">
+            <div class="glass-card visual-card">
+              <div class="visual-badge">
+                <span class="visual-number">01</span>
+                <span class="visual-label">MCA Student</span>
+              </div>
+              <div class="visual-badge">
+                <span class="visual-number">02</span>
+                <span class="visual-label">Good Listener</span>
+              </div>
+              <div class="visual-badge">
+                <span class="visual-number">03</span>
+                <span class="visual-label">Team Player</span>
+              </div>
+              <!-- Futuristic holographic grid effect -->
+              <div class="holo-grid"></div>
+              <div class="card-glow-inner"></div>
+            </div>
+          </div>
+          
+          <div class="about-text animate-on-scroll">
+            <h3 class="about-subtitle">Blending Technical Logic with Creative Aesthetics</h3>
+            <p>
+              I am a Computer Application student with a strong interest in programming, technology, and problem-solving. As a quick learner with knowledge of <strong>Python, Java, and computer fundamentals</strong>, I am passionate about improving my technical skills and gaining practical experience in software and IT-related fields.
+            </p>
+            <p>
+              Being a <strong>Good Listener</strong> enables me to communicate effectively and collaborate as an adaptable team player. I carry a positive attitude toward learning and master new technologies quickly.
+            </p>
+            
+            <!-- Languages Panel -->
+            <div class="languages-panel">
+              <h4 class="languages-title">Languages Known</h4>
+              <div class="languages-list-tags">
+                <span class="lang-tag">English</span>
+                <span class="lang-tag">Hindi</span>
+                <span class="lang-tag">Bengali</span>
+              </div>
+            </div>
+            
+            <div class="about-stats">
+              <div class="stat-item">
+                <span class="stat-num">100%</span>
+                <span class="stat-label">Listening Focus</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">2+</span>
+                <span class="stat-label">Core Projects</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">Kolkata</span>
+                <span class="stat-label">Location</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Experience Timeline Section -->
+    <section id="education" class="education-section section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">// Academic &amp; Professional Journey</span>
+          <h2 class="section-title">EDUCATION &amp; EXPERIENCE</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="timeline-grid">
+          <!-- Education Column -->
+          <div class="timeline-col animate-on-scroll">
+            <h3 class="timeline-col-title">Education</h3>
+            <div class="timeline">
+              <!-- Item 1 -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-date">2025 - 2027</span>
+                <h4 class="timeline-title">Master of Computer Applications (MCA)</h4>
+                <p class="timeline-institution">Meghnad Saha Institute of Technology (MSIT)</p>
+                <p class="timeline-desc">Deepening knowledge in advanced programming, software engineering, databases, and algorithms.</p>
+              </div>
+              
+              <!-- Item 2 -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-date">2022 - 2025</span>
+                <h4 class="timeline-title">Bachelor of Computer Applications (BCA)</h4>
+                <p class="timeline-institution">Brainware University</p>
+                <p class="timeline-desc">Graduated with a solid foundation in computer application fundamentals, logic, and networking.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Column -->
+          <div class="timeline-col animate-on-scroll">
+            <h3 class="timeline-col-title">Experience</h3>
+            <div class="timeline">
+              <!-- Item 1 -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <span class="timeline-date">2025 - 2026</span>
+                <h4 class="timeline-title">Relationship Manager</h4>
+                <p class="timeline-institution">Integrated Enterprise Private Limited</p>
+                <p class="timeline-desc">Managed client relationships, coordinated project workflows, and utilized communication and leadership skills to drive collaborative operations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tagline">// My Competence</span>
+          <h2 class="section-title">SERVICES &amp; SOLUTIONS</h2>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="services-grid">
+          <!-- Service 1: Video Editing -->
+          <div class="glass-card service-card animate-on-scroll" id="service-video-editing">
+            <div class="service-icon-wrapper">
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            </div>
+            <h3 class="service-title">Video Editing</h3>
+            <p class="service-description">Professional layout structure, pacing, audio integration, and cinematic transitions. Crafting highly engaging videos tailored for audience retention.</p>
+            <div class="card-glow-inner"></div>
+          </div>
+
+          <!-- Service 2: Motion Graphics -->
+          <div class="glass-card service-card animate-on-scroll" id="service-motion-graphics">
+            <div class="service-icon-wrapper">
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <h3 class="service-title">Motion Graphics</h3>
+            <p class="service-description">Intro clips, typography reveal designs, lower thirds, and animated overlays that give videos a professional creative agency aesthetic.</p>
+            <div class="card-glow-inner"></div>
+          </div>
+
+          <!-- Service 3: Social Media Content -->
+          <div class="glass-card service-card animate-on-scroll" id="service-social-media">
+            <div class="service-icon-wrapper">
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            </div>
+            <h3 class="service-title">Social Media Content</h3>
+            <p class="service-description">Optimized short-form vertical Reels and TikToks configured with dynamic text overlays, fast-cut editing, and custom sound design.</p>
+            <div class="card-glow-inner"></div>
+          </div>
+
+          <!-- Service 4: YouTube Editing -->
+          <div class="glass-card service-card animate-on-scroll" id="service-youtube">
+            <div class="service-icon-wrapper">
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+            </div>
+            <h3 class="service-title">YouTube Editing</h3>
+            <p class="service-description">Pacing adjustment, structural story flow, audio cleanup, and call-to-actions that help channels build consistent subscriber growth.</p>
+            <div class="card-glow-inner"></div>
+          </div>
+
+          <!-- Service 5: Ad Creatives -->
+          <div class="glass-card service-card animate-on-scroll" id="service-ads">
+            <div class="service-icon-wrapper">
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            </div>
+            <h3 class="service-title">Ad Creatives</h3>
+            <p class="service-description">High-conversion promotional commercials for social marketing, built with key hooks, user review templates, and call-to-actions.</p>
+            <div class="card-glow-inner"></div>
+          </div>
+
+          <!-- Service 6: Web Applications (BCA/MCA skill) -->
+          <div class="glass-card service-card animate-on-scroll" id="service-web-dev">
+            <div class="service-icon-wrapper">
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3 class="service-title">Development</h3>
+            <p class="service-description">Frontend pages, full-stack systems, and web projects using HTML, CSS, JavaScript, Python, and SQL databases with clean organization.</p>
+            <div class="card-glow-inner"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">// Developer &amp; Creator Portfolio</span>
+          <h2 class="section-title">PROJECT SHOWCASE</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- Project Filters -->
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all" id="filter-all">All Projects</button>
+          <button class="filter-btn" data-filter="dev" id="filter-dev">Software &amp; Web</button>
+          <button class="filter-btn" data-filter="editing" id="filter-editing">Video &amp; Ads</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+          <!-- Project 1: EduCareer -->
+          <div class="project-item animate-on-scroll" data-category="dev">
+            <div class="glass-card project-card">
+              <div class="project-media">
+                <div class="project-img-placeholder" style="background: linear-gradient(135deg, rgba(0,242,254,0.1) 0%, rgba(59,130,246,0.1) 100%);">
+                  <svg class="media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <div class="project-overlay">
+                  <span class="project-category">Software Development</span>
+                  <h3 class="project-name">EduCareer</h3>
+                  <p class="project-summary">A comprehensive career guidance and educational path platform designed to align students with market demands.</p>
+                  <button class="btn-play-demo" id="btn-project-1" aria-label="Details for EduCareer">Project Info</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: E-Commerce -->
+          <div class="project-item animate-on-scroll" data-category="dev">
+            <div class="glass-card project-card">
+              <div class="project-media">
+                <div class="project-img-placeholder" style="background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(37,99,235,0.1) 100%);">
+                  <svg class="media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                </div>
+                <div class="project-overlay">
+                  <span class="project-category">Web Development</span>
+                  <h3 class="project-name">E-Commerce System</h3>
+                  <p class="project-summary">An interactive online marketplace featuring product listings, filtering logic, and cart database operations.</p>
+                  <button class="btn-play-demo" id="btn-project-2" aria-label="Details for E-Commerce">Project Info</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: Tech Vlog -->
+          <div class="project-item animate-on-scroll" data-category="editing">
+            <div class="glass-card project-card">
+              <div class="project-media">
+                <div class="project-img-placeholder" style="background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(244,63,94,0.1) 100%);">
+                  <svg class="media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                </div>
+                <div class="project-overlay">
+                  <span class="project-category">Video Editing</span>
+                  <h3 class="project-name">Tech Vlog Narrative</h3>
+                  <p class="project-summary">Fast-paced, highly engaging YouTube video with custom graphics overlays and audio sweetening.</p>
+                  <button class="btn-play-demo" id="btn-project-3" aria-label="Play Demo for Tech Vlog Narrative">Play Demo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: Cinematic Reels -->
+          <div class="project-item animate-on-scroll" data-category="editing">
+            <div class="glass-card project-card">
+              <div class="project-media">
+                <div class="project-img-placeholder" style="background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(16,185,129,0.1) 100%);">
+                  <svg class="media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                </div>
+                <div class="project-overlay">
+                  <span class="project-category">Video Editing</span>
+                  <h3 class="project-name">Cinematic Travel Reel</h3>
+                  <p class="project-summary">Color-graded montage with speed ramps and atmospheric sound effects optimized for social media.</p>
+                  <button class="btn-play-demo" id="btn-project-4" aria-label="Play Demo for Cinematic Travel Reel">Play Demo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5: Logo Animation -->
+          <div class="project-item animate-on-scroll" data-category="editing">
+            <div class="glass-card project-card">
+              <div class="project-media">
+                <div class="project-img-placeholder" style="background: linear-gradient(135deg, rgba(236,72,153,0.1) 0%, rgba(168,85,247,0.1) 100%);">
+                  <svg class="media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </div>
+                <div class="project-overlay">
+                  <span class="project-category">Motion Graphics</span>
+                  <h3 class="project-name">Logo Reveal Animation</h3>
+                  <p class="project-summary">Sleek intro logo reveal with metallic particle effects and custom sound sync for an esports brand.</p>
+                  <button class="btn-play-demo" id="btn-project-5" aria-label="Play Demo for Logo Reveal Animation">Play Demo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 6: Product Promo -->
+          <div class="project-item animate-on-scroll" data-category="editing">
+            <div class="glass-card project-card">
+              <div class="project-media">
+                <div class="project-img-placeholder" style="background: linear-gradient(135deg, rgba(244,63,94,0.1) 0%, rgba(99,102,241,0.1) 100%);">
+                  <svg class="media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div class="project-overlay">
+                  <span class="project-category">Ad Creatives</span>
+                  <h3 class="project-name">SaaS Product Commercial</h3>
+                  <p class="project-summary">Dynamic promotional ad incorporating kinetic text transitions and product feature summaries.</p>
+                  <button class="btn-play-demo" id="btn-project-6" aria-label="Play Demo for SaaS Product Commercial">Play Demo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tagline">// Core Competencies</span>
+          <h2 class="section-title">SKILLS &amp; TOOLS</h2>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="skills-wrapper">
+          <!-- Programming & Core (Resume) -->
+          <div class="glass-card skills-card animate-on-scroll">
+            <h3 class="skills-group-title">Technical Suite</h3>
+            <div class="skills-list">
+              <!-- Python -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Python Programming</span>
+                  <span class="skill-percent">90%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 90%;"></div>
+                </div>
+              </div>
+
+              <!-- Java -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Java Programming</span>
+                  <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 85%;"></div>
+                </div>
+              </div>
+
+              <!-- DSA -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Data Structures &amp; Algorithms (DSA)</span>
+                  <span class="skill-percent">80%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 80%;"></div>
+                </div>
+              </div>
+
+              <!-- Web Development -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Web Development (HTML, CSS, JS)</span>
+                  <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 85%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional & Creative (Resume) -->
+          <div class="glass-card skills-card animate-on-scroll">
+            <h3 class="skills-group-title">Professional &amp; Creative</h3>
+            <div class="skills-list">
+              <!-- Marketing -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Marketing &amp; Ad Creation</span>
+                  <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 85%;"></div>
+                </div>
+              </div>
+
+              <!-- Leadership -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Leadership &amp; Team Collaboration</span>
+                  <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 85%;"></div>
+                </div>
+              </div>
+
+              <!-- Video Editing -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Video Editing (Premiere, Resolve)</span>
+                  <span class="skill-percent">95%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 95%;"></div>
+                </div>
+              </div>
+
+              <!-- Motion Design -->
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Motion Graphics (After Effects)</span>
+                  <span class="skill-percent">80%</span>
+                </div>
+                <div class="skill-bar-bg">
+                  <div class="skill-bar-fill" style="width: 80%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tagline">// Connect With Me</span>
+          <h2 class="section-title">START A PROJECT</h2>
+          <div class="section-divider center"></div>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info -->
+          <div class="contact-info-panel animate-on-scroll">
+            <h3 class="contact-title">Let's build something epic together</h3>
+            <p class="contact-subtext">Have a project, a job opportunity, or just want to chat? Fill out the form or reach out directly. I'm always listening.</p>
+            
+            <div class="contact-methods">
+              <!-- Phone -->
+              <div class="contact-method-item">
+                <div class="contact-method-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div class="contact-method-content">
+                  <span class="contact-method-label">Call Me</span>
+                  <a href="tel:+917044065016" class="contact-method-value">+91 7044065016</a>
+                </div>
+              </div>
+
+              <!-- WhatsApp Chat (Real-time Connect) -->
+              <div class="contact-method-item">
+                <div class="contact-method-icon" style="color: #25d366; background: rgba(37, 211, 102, 0.05); border-color: rgba(37, 211, 102, 0.25);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                </div>
+                <div class="contact-method-content">
+                  <span class="contact-method-label">WhatsApp Chat</span>
+                  <a href="https://wa.me/917044065016" target="_blank" rel="noopener noreferrer" class="contact-method-value" style="color: #25d366; text-shadow: 0 0 8px rgba(37, 211, 102, 0.2);">Message Real-Time</a>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="contact-method-item">
+                <div class="contact-method-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="contact-method-content">
+                  <span class="contact-method-label">Email Me</span>
+                  <a href="mailto:piagho79@gmail.com" class="contact-method-value">piagho79@gmail.com</a>
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="contact-method-item">
+                <div class="contact-method-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div class="contact-method-content">
+                  <span class="contact-method-label">Based In</span>
+                  <span class="contact-method-value">Kolkata, India</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links-wrapper">
+              <h4 class="socials-title">Follow My Channels</h4>
+              <div class="social-links-grid">
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/abhinandan-ghosh-a78a20236?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="social-link-btn" id="social-linkedin" aria-label="LinkedIn Profile">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  <span>LinkedIn</span>
+                </a>
+                
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/abhivisionx?igsh=bTByNW0zYnZibTBx" target="_blank" rel="noopener noreferrer" class="social-link-btn" id="social-instagram" aria-label="Instagram Profile">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                  <span>Instagram</span>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/abhivisionx" target="_blank" rel="noopener noreferrer" class="social-link-btn" id="social-github" aria-label="GitHub Profile">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form (Interactive Glassmorphic Form - Pre-wired with Formspree) -->
+          <div class="contact-form-panel glass-card animate-on-scroll">
+            <form id="contact-form" class="contact-form" action="https://formsubmit.co/ajax/piagho79@gmail.com" method="POST">
+              <!-- Anti-Spam Honeypot Field -->
+              <input type="text" name="_honey" style="display:none">
+              <!-- Disable Captcha redirect for smooth AJAX behavior -->
+              <input type="hidden" name="_captcha" value="false">
+              <!-- Custom Email Subject -->
+              <input type="hidden" name="_subject" value="New Portfolio Contact Submission!">
+              <div class="form-group">
+                <label for="form-name" class="form-label">Full Name</label>
+                <input type="text" id="form-name" name="name" class="form-input" placeholder="e.g., John Doe" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email" class="form-label">Email Address</label>
+                <input type="email" id="form-email" name="email" class="form-input" placeholder="e.g., john@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-subject" class="form-label">Subject</label>
+                <input type="text" id="form-subject" name="subject" class="form-input" placeholder="How can I help you?" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-message" class="form-label">Message</label>
+                <textarea id="form-message" name="message" class="form-textarea" placeholder="Tell me about your project..." rows="5" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" id="btn-submit-form">
+                <span>Send Message</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+            <div id="form-success-msg" class="form-success-message" aria-hidden="true">
+              <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              <h4>Message Transmitted!</h4>
+              <p>Thank you. I have received your transmission and will listen to your request. I'll get back to you shortly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#" class="logo footer-logo">
+          <span class="logo-accent">&lt;</span>AG<span class="logo-accent"> /&gt;</span>
+        </a>
+        <p class="footer-tagline">Pursuing Excellence in Logic &amp; Visuals</p>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 Abhinandan Ghosh. All rights reserved.</p>
+        <a href="#" class="btn-back-to-top" id="btn-top" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Demo Video Modal (For showcase interactives) -->
+  <div class="modal" id="video-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-close-backdrop"></div>
+    <div class="modal-content glass-card">
+      <button class="modal-close-btn" id="btn-modal-close" aria-label="Close demo modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-video-wrapper">
+        <video id="modal-player" controls preload="metadata">
+          <source src="webvideo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <h3 class="modal-title" id="modal-project-title">Project Title</h3>
+      <p class="modal-description" id="modal-project-desc">Description</p>
+    </div>
+  </div>
+
+  <!-- HTML5 Canvas for Matrix rain effect -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- AI Core Floating Trigger -->
+  <div class="ai-core-trigger" id="ai-core-trigger" aria-label="Open Neural Core Assistant">
+    <div class="ai-core-orb">
+      <div class="ai-core-inner"></div>
+      <div class="ai-core-ring"></div>
+    </div>
+    <span class="ai-core-tooltip">AI Assistant</span>
+  </div>
+
+  <!-- Neural Core Assistant Modal Panel -->
+  <div class="ai-panel" id="ai-panel" aria-hidden="true">
+    <div class="ai-panel-backdrop" id="ai-panel-backdrop"></div>
+    <div class="ai-panel-content glass-card">
+      <button class="ai-close-btn" id="ai-close-btn" aria-label="Close Assistant">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      
+      <div class="ai-header">
+        <div class="ai-pulse-dot"></div>
+        <h3 class="ai-panel-title">NEURAL CORE ASSISTANT v1.2</h3>
+      </div>
+      
+      <div class="ai-body">
+        <p class="ai-response-box" id="ai-response">Greetings! I am Abhinandan's digital assistant. Select a command chip below or click the microphone to speak a command (e.g. "skills", "projects", "matrix", "color").</p>
+        
+        <!-- Voice Indicator Visualizer -->
+        <div class="ai-visualizer" id="ai-visualizer">
+          <span class="vis-bar"></span>
+          <span class="vis-bar"></span>
+          <span class="vis-bar"></span>
+          <span class="vis-bar"></span>
+          <span class="vis-bar"></span>
+          <span class="vis-bar"></span>
+          <span class="vis-bar"></span>
+          <span class="vis-bar"></span>
+        </div>
+
+        <!-- Speech Input Trigger -->
+        <div class="ai-input-group">
+          <button class="btn-mic" id="btn-mic" aria-label="Start Voice Command">
+            <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+            <span id="mic-status">Tap to Speak</span>
+          </button>
+        </div>
+
+        <!-- Quick Command Chips -->
+        <div class="ai-chips">
+          <button class="ai-chip" data-cmd="greet">Vocal Greeting</button>
+          <button class="ai-chip" data-cmd="skills">Skills Protocol</button>
+          <button class="ai-chip" data-cmd="projects">View Work</button>
+          <button class="ai-chip" data-cmd="matrix">Toggle Matrix</button>
+          <button class="ai-chip" data-cmd="theme">Shift Accent</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
