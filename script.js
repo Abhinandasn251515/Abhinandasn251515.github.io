@@ -794,4 +794,117 @@ document.addEventListener('DOMContentLoaded', () => {
       handleAICommand(cmd);
     });
   });
+
+  /* ===================================================
+     20. HERO INTERACTIVE PARTICLE NETWORK
+     =================================================== */
+  const initHeroParticles = () => {
+    const pCanvas = document.getElementById('hero-particles');
+    if (!pCanvas) return;
+    const pCtx = pCanvas.getContext('2d');
+    
+    let width = pCanvas.width = pCanvas.offsetWidth;
+    let height = pCanvas.height = pCanvas.offsetHeight;
+    
+    const particles = [];
+    const maxParticles = isTouchDevice ? 30 : 70;
+    const connectionDist = 110;
+    const mouse = { x: null, y: null, radius: 150 };
+    
+    window.addEventListener('resize', () => {
+      if (pCanvas) {
+        width = pCanvas.width = pCanvas.offsetWidth;
+        height = pCanvas.height = pCanvas.offsetHeight;
+      }
+    });
+    
+    const heroSection = document.getElementById('hero');
+    if (heroSection && !isTouchDevice) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      heroSection.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+    }
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+        
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.x -= dx * force * 0.02;
+            this.y -= dy * force * 0.02;
+          }
+        }
+      }
+      
+      draw() {
+        pCtx.beginPath();
+        pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        pCtx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-cyan').trim() || '#00f2fe';
+        pCtx.fill();
+      }
+    }
+    
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(new Particle());
+    }
+    
+    const animate = () => {
+      pCtx.clearRect(0, 0, width, height);
+      
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < connectionDist) {
+            const alpha = (1 - (dist / connectionDist)) * 0.12;
+            pCtx.beginPath();
+            pCtx.moveTo(particles[i].x, particles[i].y);
+            pCtx.lineTo(particles[j].x, particles[j].y);
+            
+            const accentCyan = getComputedStyle(document.documentElement).getPropertyValue('--accent-cyan').trim() || '#00f2fe';
+            pCtx.strokeStyle = `${accentCyan}${Math.floor(alpha * 255).toString(16).padStart(2, '0')}`;
+            pCtx.lineWidth = 0.8;
+            pCtx.stroke();
+          }
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    };
+    
+    animate();
+  };
+
+  // Run the particle network
+  initHeroParticles();
 });
