@@ -1217,22 +1217,39 @@ button, input, textarea {
   font-size: 0.9rem;
 }
 
+.skill-item {
+  transition: transform var(--transition-fast) ease-out;
+}
+
+.skill-item:hover {
+  transform: translateX(6px);
+}
+
 .skill-name {
   font-family: var(--font-heading);
   font-weight: 500;
   color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.skill-item:hover .skill-name {
+  color: var(--color-text-primary);
+  text-shadow: 0 0 8px var(--skill-color);
 }
 
 .skill-percent {
   font-family: var(--font-heading);
   font-weight: 700;
-  color: var(--accent-cyan);
+  color: var(--skill-color, var(--accent-cyan));
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  transition: color var(--transition-fast);
 }
 
 .skill-bar-bg {
   width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.05);
+  height: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -1240,14 +1257,31 @@ button, input, textarea {
 
 .skill-bar-fill {
   height: 100%;
-  background: var(--gradient-primary);
+  background: linear-gradient(90deg, var(--skill-color, var(--accent-cyan)) 0%, var(--accent-purple) 100%);
   border-radius: 10px;
   position: absolute;
   top: 0;
   left: 0;
-  width: 0; /* Animated dynamically or handled in styling */
+  width: 0;
   transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+  box-shadow: 0 0 10px var(--skill-color, var(--accent-cyan));
+}
+
+/* Flowing Light Beam scanline inside skill bars */
+.skill-bar-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100px;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  animation: scanline-flow 2.5s infinite linear;
+}
+
+@keyframes scanline-flow {
+  0% { left: -100px; }
+  100% { left: 100%; }
 }
 
 /* ----------------------------------------------------
