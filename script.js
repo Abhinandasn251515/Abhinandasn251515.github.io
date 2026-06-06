@@ -622,6 +622,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const aiVisualizer = document.getElementById('ai-visualizer');
   let currentUtterance = null;
 
+  // Preload voices list early to ensure SpeechSynthesis behaves correctly in all browsers
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+  }
+
   const speakText = (text) => {
     if (!window.speechSynthesis) return;
 
@@ -630,35 +640,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (aiResponse) aiResponse.textContent = text;
 
-    currentUtterance = new SpeechSynthesisUtterance(text);
-    
-    const voices = window.speechSynthesis.getVoices();
-    const englishVoice = voices.find(voice => voice.lang.includes('en-US') || voice.lang.includes('en-GB') || voice.lang.includes('en'));
-    if (englishVoice) {
-      currentUtterance.voice = englishVoice;
-    }
-    
-    currentUtterance.rate = 1.05;
-    currentUtterance.pitch = 1.0;
+    // Small delay ensures synthesis cancellation is completed before queuing the next phrase
+    setTimeout(() => {
+      currentUtterance = new SpeechSynthesisUtterance(text);
+      
+      const voices = window.speechSynthesis.getVoices();
+      
+      // Look for a high-quality English voice
+      let selectedVoice = voices.find(voice => voice.lang.includes('en-US') || voice.lang.includes('en_US'))
+                      || voices.find(voice => voice.lang.includes('en-GB') || voice.lang.includes('en_GB'))
+                      || voices.find(voice => voice.lang.includes('en'));
 
-    currentUtterance.onstart = () => {
-      if (aiVisualizer) aiVisualizer.classList.add('active');
-    };
+      if (selectedVoice) {
+        currentUtterance.voice = selectedVoice;
+      }
+      
+      currentUtterance.rate = 1.02;
+      currentUtterance.pitch = 1.0;
 
-    currentUtterance.onend = () => {
-      if (aiVisualizer) aiVisualizer.classList.remove('active');
-    };
+      currentUtterance.onstart = () => {
+        if (aiVisualizer) aiVisualizer.classList.add('active');
+      };
 
-    currentUtterance.onerror = () => {
-      if (aiVisualizer) aiVisualizer.classList.remove('active');
-    };
+      currentUtterance.onend = () => {
+        if (aiVisualizer) aiVisualizer.classList.remove('active');
+      };
 
-    window.speechSynthesis.speak(currentUtterance);
+      currentUtterance.onerror = (e) => {
+        console.error("SpeechSynthesis error:", e);
+        if (aiVisualizer) aiVisualizer.classList.remove('active');
+      };
+
+      window.speechSynthesis.speak(currentUtterance);
+    }, 100);
   };
-
-  if (window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
-    window.speechSynthesis.onvoiceschanged = () => {};
-  }
 
   /* ===================================================
      17. SPEECH RECOGNITION (VOICE COMMANDS)
