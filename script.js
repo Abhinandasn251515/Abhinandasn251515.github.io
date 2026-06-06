@@ -224,6 +224,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const fadeVideoVolume = (targetVolume, duration = 800) => {
     if (!heroVideo) return;
     
+    // Mobile/touch devices (iOS/Android Safari/Chrome) do not support programmatically setting 'volume' (it is read-only).
+    // We must toggle the 'muted' attribute directly.
+    if (isTouchDevice) {
+      if (targetVolume === 0) {
+        heroVideo.muted = true;
+      } else {
+        heroVideo.muted = false;
+        heroVideo.volume = 1.0;
+      }
+      return;
+    }
+    
     if (targetVolume > 0 && heroVideo.muted) {
       heroVideo.muted = false;
     }
@@ -261,10 +273,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Auto-Unmute voice smoothly on first page interaction
   const autoUnmuteOnInteraction = () => {
     if (heroVideo) {
-      heroVideo.volume = 0;
+      if (isTouchDevice) {
+        heroVideo.muted = false;
+        heroVideo.volume = 1.0;
+      } else {
+        heroVideo.volume = 0;
+        fadeVideoVolume(1, 1000); // Smooth fade to 100% volume over 1s
+      }
       userWantsSound = true;
-      fadeVideoVolume(1, 1000); // Smooth fade to 100% volume over 1s
-      console.log("Voice unmuted and fading in automatically.");
+      console.log("Voice unmuted automatically.");
     }
     // Clean up all document listener handles
     document.removeEventListener('click', autoUnmuteOnInteraction);
