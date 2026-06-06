@@ -280,20 +280,25 @@ document.addEventListener('DOMContentLoaded', () => {
         heroVideo.volume = 0;
         fadeVideoVolume(1, 1000); // Smooth fade to 100% volume over 1s
       }
-      userWantsSound = true;
-      console.log("Voice unmuted automatically.");
+      
+      // Attempt to verify if the video is successfully unmuted.
+      // If the browser blocked it (e.g. if the user gesture wasn't registered yet),
+      // we keep the listeners active so the next click/tap will unmute it.
+      if (!heroVideo.muted) {
+        userWantsSound = true;
+        console.log("Voice unmuted automatically.");
+        
+        // Clean up all document listener handles
+        document.removeEventListener('click', autoUnmuteOnInteraction);
+        document.removeEventListener('touchend', autoUnmuteOnInteraction);
+      }
     }
-    // Clean up all document listener handles
-    document.removeEventListener('click', autoUnmuteOnInteraction);
-    document.removeEventListener('scroll', autoUnmuteOnInteraction);
-    document.removeEventListener('touchstart', autoUnmuteOnInteraction);
   };
 
-  // Wait 1.0s after page loads before listening to click/scroll triggers to prevent sudden audio shock
+  // Wait 1.0s after page loads before listening to click/touchend triggers to prevent sudden audio shock
   setTimeout(() => {
     document.addEventListener('click', autoUnmuteOnInteraction);
-    document.addEventListener('scroll', autoUnmuteOnInteraction);
-    document.addEventListener('touchstart', autoUnmuteOnInteraction);
+    document.addEventListener('touchend', autoUnmuteOnInteraction);
   }, 1000);
 
   // Auto-mute audio smoothly when scrolling out of hero, auto-unmute smoothly when scrolling back up
