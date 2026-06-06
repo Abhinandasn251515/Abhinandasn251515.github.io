@@ -640,39 +640,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (aiResponse) aiResponse.textContent = text;
 
-    // Small delay ensures synthesis cancellation is completed before queuing the next phrase
-    setTimeout(() => {
-      currentUtterance = new SpeechSynthesisUtterance(text);
-      
-      const voices = window.speechSynthesis.getVoices();
-      
-      // Look for a high-quality English voice
-      let selectedVoice = voices.find(voice => voice.lang.includes('en-US') || voice.lang.includes('en_US'))
-                      || voices.find(voice => voice.lang.includes('en-GB') || voice.lang.includes('en_GB'))
-                      || voices.find(voice => voice.lang.includes('en'));
+    currentUtterance = new SpeechSynthesisUtterance(text);
+    
+    const voices = window.speechSynthesis.getVoices();
+    
+    // Look for a high-quality English voice
+    let selectedVoice = voices.find(voice => voice.lang.includes('en-US') || voice.lang.includes('en_US'))
+                    || voices.find(voice => voice.lang.includes('en-GB') || voice.lang.includes('en_GB'))
+                    || voices.find(voice => voice.lang.includes('en'));
 
-      if (selectedVoice) {
-        currentUtterance.voice = selectedVoice;
-      }
-      
-      currentUtterance.rate = 1.02;
-      currentUtterance.pitch = 1.0;
+    if (selectedVoice) {
+      currentUtterance.voice = selectedVoice;
+    }
+    
+    currentUtterance.rate = 1.02;
+    currentUtterance.pitch = 1.0;
 
-      currentUtterance.onstart = () => {
-        if (aiVisualizer) aiVisualizer.classList.add('active');
-      };
+    currentUtterance.onstart = () => {
+      if (aiVisualizer) aiVisualizer.classList.add('active');
+    };
 
-      currentUtterance.onend = () => {
-        if (aiVisualizer) aiVisualizer.classList.remove('active');
-      };
+    currentUtterance.onend = () => {
+      if (aiVisualizer) aiVisualizer.classList.remove('active');
+    };
 
-      currentUtterance.onerror = (e) => {
-        console.error("SpeechSynthesis error:", e);
-        if (aiVisualizer) aiVisualizer.classList.remove('active');
-      };
+    currentUtterance.onerror = (e) => {
+      console.error("SpeechSynthesis error:", e);
+      if (aiVisualizer) aiVisualizer.classList.remove('active');
+    };
 
-      window.speechSynthesis.speak(currentUtterance);
-    }, 100);
+    window.speechSynthesis.speak(currentUtterance);
   };
 
   /* ===================================================
@@ -796,9 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeVideoVolume(0, 300); // Quick fade out over 300ms
       }
       
-      setTimeout(() => {
-        speakText("Neural Assistant Core online. State your command protocol.");
-      }, 300);
+      speakText("Neural Assistant Core online. State your command protocol.");
     }
   };
 
