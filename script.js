@@ -400,13 +400,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModalBtn = document.getElementById('btn-modal-close');
   
   const projectDetails = {
+    'btn-project-new': {
+      title: 'Color Tube Master 3D & Arcade',
+      desc: `<strong>Color Tube Master 3D & Arcade</strong> is a premium 3D puzzle arcade game and native Android wrapper built entirely in Vanilla JS/CSS3 and Kotlin.<br><br>
+<strong>Core Tech Stack:</strong> HTML5, Vanilla CSS3 (3D Isometric transforms), ES6+ JS, Firebase Auth, Firestore Database, Kotlin, Jetpack Compose, Web Audio API.<br><br>
+<strong>Key Technical Achievements:</strong><br>
+• <strong>Custom 3D Isometric Engine (Pure CSS):</strong> Designed visual isometric containers with liquid layers using CSS 3D transforms.<br>
+• <strong>Algorithmic AI Solvers:</strong> Implemented BFS solvers for puzzles and a Minimax AI engine for 3D isometric Tic-Tac-Toe.<br>
+• <strong>Procedural Audio Synthesis:</strong> Synthesized all game audio mathematically via the browser's Web Audio API.<br>
+• <strong>Real-time Cloud Sync:</strong> Used Firebase Firestore live listeners to sync leaderboards and player states.<br>
+• <strong>Native Android Wrapper:</strong> Built service workers for offline play and packaged the app in a Kotlin WebView container.<br><br>
+<div class="modal-links" style="display: flex; gap: 15px; margin-top: 15px;">
+  <a href="https://color-tube-master.web.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; width: auto; height: 36px; min-width: 100px;">Live Demo</a>
+  <a href="https://github.com/Abhinandasn251515/color-tube-master" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.8rem; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; width: auto; height: 36px; min-width: 100px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass);">GitHub Repo</a>
+</div>`
+    },
     'btn-project-1': {
       title: 'EduCareer Platform',
-      desc: 'EduCareer is a comprehensive digital catalog designed to align academic courses with industrial specifications. It provides interactive path roadmaps, skills evaluations, and links users to direct career openings matching their MCA or BCA skill levels.'
+      desc: `<strong>EduCareer</strong> is a comprehensive career guidance and educational path platform designed to align academic courses with industrial specifications. It provides interactive path roadmaps, skills evaluations, and links users to direct career openings matching their MCA or BCA skill levels.<br><br>
+<strong>Core Tech Stack:</strong> HTML5, CSS3, JavaScript, Java, Spring Boot, MySQL.<br><br>
+<strong>Key Features:</strong><br>
+• Interactive career roadmap visualization.<br>
+• Skill assessments and gap analysis.<br>
+• Industry job matching algorithm based on skill profile.<br>
+• Course recommendation system for students.`
     },
     'btn-project-2': {
       title: 'E-Commerce System',
-      desc: 'An interactive online marketplace built to demonstrate database optimization and modern frontend layout design. Implements complete product catalogue queries, card additions, session checks, and an automated mock checkout process.'
+      desc: `<strong>E-Commerce System</strong> is an interactive online marketplace built to demonstrate database optimization and modern frontend layout design. Implements complete product catalogue queries, cart additions, session checks, and an automated mock checkout process.<br><br>
+<strong>Core Tech Stack:</strong> JavaScript, Bootstrap, Node.js, Express, MongoDB.<br><br>
+<strong>Key Features:</strong><br>
+• Fast search queries and dynamic category filters.<br>
+• Secure user sessions and checkout validation.<br>
+• Backend database optimization to handle concurrent traffic.`
     },
     'btn-project-3': {
       title: 'Tech Vlog Narrative',
@@ -428,16 +454,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const openModal = (projectId) => {
     const details = projectDetails[projectId];
-    if (details && modal && modalPlayer) {
+    if (details && modal) {
       modalTitle.textContent = details.title;
-      modalDesc.textContent = details.desc;
+      modalDesc.innerHTML = details.desc;
+      
+      const isDevProject = projectId === 'btn-project-1' || projectId === 'btn-project-2' || projectId === 'btn-project-new';
+      const videoWrapper = document.querySelector('.modal-video-wrapper');
       
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('no-scroll');
       
-      modalPlayer.currentTime = 0;
-      modalPlayer.play().catch(e => console.log('Playback prevented: ' + e));
+      if (isDevProject) {
+        if (videoWrapper) videoWrapper.style.display = 'none';
+      } else {
+        if (videoWrapper) videoWrapper.style.display = 'block';
+        if (modalPlayer) {
+          modalPlayer.currentTime = 0;
+          modalPlayer.play().catch(e => console.log('Playback prevented: ' + e));
+        }
+      }
     }
   };
 
