@@ -400,6 +400,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModalBtn = document.getElementById('btn-modal-close');
   
   const projectDetails = {
+    'btn-project-placemate': {
+      title: 'PlaceMate - Placement Prep Platform',
+      desc: `<strong>PlaceMate</strong> is an interactive, production-ready serverless web application designed to simulate coding tests, timed aptitude exams, and placement preparation resources for top tech companies. Powered by Firestore’s real-time engine, it features dynamic global rankings, live activity logs, multi-channel chats with typing indicators, and an advanced client-side ATS Resume Builder.<br><br>
+<strong>Core Tech Stack:</strong> React 18, Vite, TailwindCSS v4, Framer Motion, Firebase Auth, Firestore Real-time Database, Monaco Editor, jsPDF, html2canvas, Firebase CDN Hosting.<br><br>
+<strong>Key Technical Achievements &amp; Contributions:</strong><br>
+• <strong>Frontend Architecture:</strong> Engineered a responsive Single Page Application (SPA) using React 18, Vite, and TailwindCSS v4 with Framer Motion for glassmorphism styles and micro-animations.<br>
+• <strong>Serverless Infrastructure:</strong> Built on Firebase, integrating Firebase Auth (including Google Sign-In) and Firestore NoSQL real-time listeners (<code>onSnapshot</code>) to synchronize progress, drives, and live chats globally.<br>
+• <strong>Monaco Code Compiler:</strong> Integrated Microsoft's Monaco Editor to run coding tasks, testing outputs dynamically against custom test-case suites in-browser.<br>
+• <strong>ATS Resume Compiler:</strong> Programmed a modular generator with 3 premium style layouts that renders and compiles resumes into high-resolution PDFs using jsPDF and html2canvas.<br>
+• <strong>Performance &amp; CDN Deployment:</strong> Optimized bundle size using chunk division, achieving sub-second load times via Firebase CDN Hosting.<br><br>
+<div class="modal-links" style="display: flex; gap: 15px; margin-top: 15px;">
+  <a href="https://placemate-d4bd0.web.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; width: auto; height: 36px; min-width: 100px;">Live Demo</a>
+  <a href="https://github.com/Abhinandasn251515/PlaceMate" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.8rem; text-decoration: none; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; width: auto; height: 36px; min-width: 100px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass);">GitHub Repo</a>
+</div>`
+    },
     'btn-project-new': {
       title: 'Color Tube Master 3D & Arcade',
       desc: `<strong>Color Tube Master 3D & Arcade</strong> is a premium 3D puzzle arcade game and native Android wrapper built entirely in Vanilla JS/CSS3 and Kotlin.<br><br>
@@ -458,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
       modalTitle.textContent = details.title;
       modalDesc.innerHTML = details.desc;
       
-      const isDevProject = projectId === 'btn-project-1' || projectId === 'btn-project-2' || projectId === 'btn-project-new';
+      const isDevProject = projectId === 'btn-project-1' || projectId === 'btn-project-2' || projectId === 'btn-project-new' || projectId === 'btn-project-placemate';
       const videoWrapper = document.querySelector('.modal-video-wrapper');
       
       modal.classList.add('open');
